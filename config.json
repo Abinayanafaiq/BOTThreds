@@ -1,0 +1,42 @@
+{
+  "defaults": {
+    "type": "image",
+    "topic": "AI Threads",
+    "title": "",
+    "isAiGenerated": true,
+    "isDraft": false,
+    "timezoneOffsetMinutes": 420,
+    "scheduleLeadMinutes": 5,
+    "maxDescriptionLength": 500
+  },
+  "cta": "Coba di 9inference.cloud — mulai Rp1.000 / 1jt token 🔥",
+  "productDetail": "Token AI murah di 9inference.cloud. Mulai Rp1.000 per 1 juta token. Buat dev, creator, chatbot, bisnis.",
+  "contentMode": "ai",
+  "ai": {
+    "systemPrompt": "Role: Threads copywriter (Bahasa Indonesia).\nReturn ONLY the final post text.\nForbidden: English notes, constraints lists, drafting, character counting, 'Line 1', thinking, explanations.\nStyle: short, friendly, 3-6 lines, no markdown.\nMust include: Rp1.000/1jt token and 9inference.cloud.\nHard limit: under 450 characters.",
+    "userPromptTemplate": "Post Threads jualan. Angle: {{topic}}.\nInfo produk: {{detail}}\nTutup pakai: {{cta}}\n\nBalas HANYA isi post (Bahasa Indonesia).",
+    "temperature": 0.8,
+    "maxTokens": 200,
+    "retries": 2,
+    "fallbackTemplate": true
+  },
+  "template": {
+    "name": "token-murah",
+    "variant": "random"
+  },
+  "images": [
+    "https://i.ibb.co/6JHTH0VF/Screenshot-2026-07-20-223632.png"
+  ],
+  "imageMode": "random",
+  "topics": [
+    "AI Threads",
+    "bansos AI"
+  ],
+  "topicMode": "random",
+  "schedule": {
+    "enabled": true,
+    "cron": "*/20 * * * *",
+    "postsPerRun": 1
+  },
+  "queue": []
+}

@@ -1,0 +1,26 @@
+{
+  "token-murah": {
+    "variants": [
+      "API AI mahal? Coba hitung dulu 👀\n\nDi 9inference.cloud token AI mulai Rp1.000 per 1 juta token.\nCocok buat dev, bot, content, dan eksperimen tanpa takut bill meledak.\n\n{{cta}}",
+      "Mau pakai AI tapi budget tipis?\n\nToken AI murah di 9inference.cloud — mulai Rp1.000 / 1jt token.\n{{detail}}\n\n{{cta}}",
+      "Quick tip hemat AI 💡\n\nJangan bayar mahal cuma buat testing/chatbot.\nPakai token murah di 9inference.cloud (mulai Rp1.000 per 1jt token).\n\n{{cta}}",
+      "Dev yang sering nge-hit API pasti ngerasain: saldo abis duluan 😅\n\nSolusi: 9inference.cloud\nToken AI mulai Rp1.000 / 1 juta token.\n\n{{cta}}",
+      "Perbandingan simpel:\n❌ API premium = bill tak terduga\n✅ 9inference.cloud = mulai Rp1.000 / 1jt token\n\nBuat {{topic}}, ini opsi hemat.\n\n{{cta}}",
+      "UMKM & creator yang pakai AI buat konten/chat customer:\nmodal kecil, output besar.\n\nToken AI di 9inference.cloud mulai Rp1.000 per 1 juta token.\n\n{{cta}}",
+      "Butuh token AI tanpa ribet?\n\n9inference.cloud — mulai Rp1.000 / 1jt token.\n{{detail}}\n\n{{cta}}",
+      "Kalau tiap eksperimen AI bikin dompet menangis… ganti sumber tokennya.\n\n9inference.cloud | mulai Rp1.000 per 1 juta token.\n\n{{cta}}"
+    ]
+  },
+  "pain-point": {
+    "variants": [
+      "Bill API AI bulan ini kejutan lagi? 😭\n\nCoba opsi hemat: token AI di 9inference.cloud mulai Rp1.000 / 1jt token.\n\n{{cta}}",
+      "Chatbot jalan, saldo API jebol.\nCerita klasik.\n\nFix-nya: 9inference.cloud — mulai Rp1.000 per 1 juta token.\n\n{{cta}}"
+    ]
+  },
+  "soft-sell": {
+    "variants": [
+      "{{detail}}\n\nKalau lagi cari token AI murah, cek 9inference.cloud.\n\n{{cta}}",
+      "Update kecil soal {{topic}}:\nmulai Rp1.000 per 1jt token di 9inference.cloud.\n\n{{cta}}"
+    ]
+  }
+}

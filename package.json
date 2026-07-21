@@ -1,0 +1,25 @@
+{
+  "name": "repliz-threads-bot",
+  "version": "1.0.0",
+  "description": "Auto-post bot for Threads via Repliz API — AI (OpenRouter) or templates",
+  "type": "module",
+  "main": "src/index.js",
+  "bin": {
+    "threads-bot": "./src/cli.js"
+  },
+  "scripts": {
+    "start": "node src/cli.js",
+    "post": "node src/cli.js post",
+    "schedule": "node src/cli.js schedule",
+    "list": "node src/cli.js list",
+    "queue": "node src/cli.js queue"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "axios": "^1.7.9",
+    "dotenv": "^16.4.7",
+    "node-cron": "^3.0.3"
+  }
+}
