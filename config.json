@@ -36,7 +36,9 @@
   "schedule": {
     "enabled": true,
     "cron": "*/20 * * * *",
-    "postsPerRun": 1
+    "postsPerRun": 1,
+    "runOnStart": false,
+    "heartbeatMinutes": 5
   },
   "queue": []
 }

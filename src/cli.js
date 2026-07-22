@@ -108,8 +108,15 @@ async function main() {
         break;
       }
       case "schedule": {
-        startScheduler();
+        const task = startScheduler();
+        if (!task) {
+          console.error("Scheduler tidak start (enabled=false?). Cek config.json schedule.enabled");
+          process.exit(1);
+        }
         console.log("Bot running. Ctrl+C to stop.");
+        console.log("Debug: set LOG_LEVEL=debug untuk log lebih detail.");
+        console.log("Debug: set schedule.runOnStart=true untuk fire segera saat start.");
+        console.log("Debug: heartbeat tiap schedule.heartbeatMinutes (default 5).");
         // keep alive
         await new Promise(() => {});
         break;

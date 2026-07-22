@@ -1,6 +1,9 @@
 import { loadConfig, loadEnv, saveConfig } from "./config.js";
 import { createReplizClient, buildScheduleBody } from "./repliz.js";
 import { buildDescription, resolveImages } from "./content.js";
+import { createLogger, ms } from "./logger.js";
+
+const log = createLogger("bot");
 
 /**
  * ISO schedule time: now + lead minutes (default from config)
@@ -16,11 +19,32 @@ export function makeScheduleAt(config, scheduleAt) {
  * Create one post (immediate schedule via Repliz)
  */
 export async function createPost(options = {}) {
+  const t0 = Date.now();
+  log.debug("createPost start", {
+    mode: options.mode,
+    topic: options.topic,
+    type: options.type,
+    hasDescription: Boolean(options.description),
+    images: options.images?.length || 0,
+  });
+
   const env = loadEnv();
   const config = loadConfig();
   const client = createReplizClient(env);
 
+  log.debug("building description...", {
+    contentMode: options.mode || config.contentMode,
+    hasOpenRouter: Boolean(env.openRouterKey),
+  });
+  const descT0 = Date.now();
   const { description, topic, mode } = await buildDescription(config, env, options);
+  log.debug("description ready", {
+    mode,
+    topic,
+    chars: description?.length || 0,
+    duration: ms(Date.now() - descT0),
+  });
+
   const mediaUrls = resolveImages(config, options.images);
   const type = options.type || config.defaults?.type || (mediaUrls.length ? "image" : "text");
   const scheduleAt = makeScheduleAt(config, options.scheduleAt);
@@ -38,7 +62,34 @@ export async function createPost(options = {}) {
     replies: options.replies || [],
   });
 
-  const result = await client.schedulePost(body);
+  log.info("calling Repliz /schedule", {
+    type: body.type,
+    topic: body.topic,
+    scheduleAt: body.scheduleAt,
+    medias: body.medias?.length || 0,
+    descChars: body.description?.length || 0,
+    isDraft: body.isDraft,
+  });
+
+  const apiT0 = Date.now();
+  let result;
+  try {
+    result = await client.schedulePost(body);
+  } catch (err) {
+    log.error("Repliz API error", {
+      duration: ms(Date.now() - apiT0),
+      status: err.response?.status,
+      data: err.response?.data,
+      message: err.message,
+    });
+    throw err;
+  }
+  log.info("Repliz OK", {
+    duration: ms(Date.now() - apiT0),
+    total: ms(Date.now() - t0),
+    resultId: result?.id || result?.data?.id || result?.scheduleId || undefined,
+  });
+  log.debug("Repliz raw result", result);
 
   // advance sequential image index
   if (config.imageMode === "sequential" && config.images?.length) {
