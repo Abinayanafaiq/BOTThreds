@@ -100,7 +100,8 @@ async function executeRun(postsPerRun, reason) {
       lastRunOk = true;
       lastError = null;
       log.info(`post ${n}/${postsPerRun} OK (${ms(Date.now() - tPost)})`, {
-        topic: res.topic,
+        grup: res.topic,
+        angle: res.angle,
         mode: res.mode,
         type: res.type,
         media: res.medias?.length || 0,

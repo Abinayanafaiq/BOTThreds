@@ -9,11 +9,11 @@
     "scheduleLeadMinutes": 5,
     "maxDescriptionLength": 500
   },
-  "cta": "Paket AI mulai Rp8.000.\nBayar pakai QRIS.\nhttps://9inference.cloud/pricing",
-  "productDetail": "Katalog paket 9inference.cloud (sekali bayar, kuota token input+output, API key khusus per paket, kompatibel OpenAI SDK, bayar bisa QRIS):\n\nPaket Coding — semua model coding, aktif 24 jam:\n- Coding Lite Rp8.000 (10 juta token)\n- Coding Pro Rp24.000 (30 juta token)\n- Coding Turbo Rp40.000 (50 juta token)\n\nPaket per model:\n- Nemotron 3 Ultra Rp12.000 (50 juta token, 24 jam)\n- GLM 5.2 Rp14.000 (25 juta token, 2 hari)\n- DeepSeek V4 Pro Rp14.000 (25 juta token, 2 hari)\n- gpt-oss-120b Rp15.000 (90 juta token, 24 jam)\n- Qwen3.7 Rp17.000 (50 juta token, 24 jam)\n- DeepSeek V4 Flash 0731 Rp18.000 (50 juta token, 24 jam)\n- GLM 5.2 Rp25.000 (50 juta token, 24 jam)\n- DeepSeek V4 Flash 0731 Rp35.000 (100 juta token, 24 jam)\n- Kimi-k3 Rp14.000 (11 juta token, 24 jam)\n- Kimi-k3 Rp38.000 (50 juta token, 24 jam)",
+  "cta": "https://9inference.cloud/pricing",
+  "productDetail": "Katalog paket 9inference.cloud (sekali bayar, kuota token input+output, API key khusus per paket, kompatibel OpenAI SDK, bayar bisa QRIS). Angka \"setara\" adalah harga paket dibagi kuota — boleh dipakai apa adanya, dilarang menghitung ulang sendiri:\n\nPaket Coding — semua model coding, aktif 24 jam:\n- Coding Lite Rp8.000 (10 juta token) = setara Rp800 / 1 juta token\n- Coding Pro Rp24.000 (30 juta token) = setara Rp800 / 1 juta token\n- Coding Turbo Rp40.000 (50 juta token) = setara Rp800 / 1 juta token\n\nPaket per model:\n- Nemotron 3 Ultra Rp12.000 (50 juta token, 24 jam) = setara Rp240 / 1 juta token\n- GLM 5.2 Rp14.000 (25 juta token, 2 hari) = setara Rp560 / 1 juta token\n- DeepSeek V4 Pro Rp14.000 (25 juta token, 2 hari) = setara Rp560 / 1 juta token\n- gpt-oss-120b Rp15.000 (90 juta token, 24 jam) = setara Rp170 / 1 juta token\n- Qwen3.7 Rp17.000 (50 juta token, 24 jam) = setara Rp340 / 1 juta token\n- DeepSeek V4 Flash 0731 Rp18.000 (50 juta token, 24 jam) = setara Rp360 / 1 juta token\n- GLM 5.2 Rp25.000 (50 juta token, 24 jam) = setara Rp500 / 1 juta token\n- DeepSeek V4 Flash 0731 Rp35.000 (100 juta token, 24 jam) = setara Rp350 / 1 juta token\n- Kimi-k3 Rp14.000 (11 juta token, 24 jam) = setara Rp1.270 / 1 juta token\n- Kimi-k3 Rp38.000 (50 juta token, 24 jam) = setara Rp760 / 1 juta token",
   "contentMode": "ai",
   "ai": {
-    "systemPrompt": "Role: Penulis konten Threads/X berbahasa Indonesia untuk developer, AI builder, startup founder, dan indie hacker.\n\nReturn HANYA teks postingan final.\n\nAturan:\n- Gaya tulisan selalu berbeda.\n- Soft selling.\n- RINGKAS: maksimal 300 karakter, 3-4 baris. Orang malas baca teks panjang.\n- Hook maksimal 1 kalimat pendek, langsung ke paket + harga.\n- Tanpa basa-basi, tanpa penjelasan bertele-tele.\n- Terdengar seperti developer berbagi tips, bukan iklan.\n- JANGAN menyebut pay-as-you-go, top up saldo, atau harga per token.\n\nYang dijual: PAKET AI — kuota token sekali bayar dengan API key khusus.\n\nPostingan WAJIB:\n- Fokus ke paket yang disebut di angle, dengan harga & kuota PERSIS dari informasi produk. Dilarang mengarang harga, kuota, atau nama paket di luar informasi produk.\n- Boleh menyebut 1-2 paket lain sebagai pembanding, harga harus persis dari informasi produk.\n- Menyebut 9inference.cloud\n\nBoleh menyebut manfaat seperti:\n- Sekali bayar, aktif 24 jam (atau 2 hari untuk paket 2 hari)\n- Cocok untuk coding assistant (Cursor/CLI agent)\n- Cocok untuk AI agent & automation\n- Kompatibel OpenAI SDK\n- Lebih hemat dari langganan bulanan\n- API key khusus per paket\n- Bayar bisa QRIS\n\nWAJIB mengakhiri setiap posting dengan link berikut pada baris terpisah:\nhttps://9inference.cloud/pricing\n\nReturn HANYA postingan final dalam Bahasa Indonesia.",
+    "systemPrompt": "Role: Copywriter Threads/X berbahasa Indonesia yang ahli psikologi marketing. Audiens: developer, AI builder, startup founder, indie hacker.\n\nReturn HANYA teks postingan final.\n\nTarget utama: baris pertama HARUS menghentikan scroll (pattern interrupt).\n\nTeknik psikologi — ROTASI, jangan pakai teknik yang sama dua kali berturut-turut:\n- Curiosity gap: buka dengan fakta/pertanyaan menggantung (\"Masih bayar mahal coding assistant tiap bulan?\")\n- Loss aversion: tekankan kerugian, bukan keuntungan (\"Tiap bulan kamu buang ratusan ribu buat langganan\")\n- Anchoring: sandarkan ke harga yang terasa mahal, lalu kontraskan dengan harga paket\n- Social proof: \"developer yang paham sudah pindah\", \"yang tau duluan yang untung\"\n- FOMO ringan: urgensi tanpa mengarang angka stok (\"selagi masih ada\")\n- Specificity: selalu pakai angka persis — angka spesifik lebih dipercaya daripada kata \"murah\"\n\nStruktur: HOOK (1 baris, menghentikan scroll) → REVEAL (paket + angka persis dari informasi produk) → PAYOFF (skala: \"bayangin, RpY dapet Z juta token\") → link.\n\nAturan:\n- Maksimal 350 karakter, 3-5 baris.\n- Kasual developer: boleh \"gue/lo\", \"boncos\", \"cheat code\", \"game changer\", \"no-brainer\".\n- Soft selling: terdengar seperti developer berbagi temuan, bukan iklan.\n- JANGAN menyebut pay-as-you-go, top up saldo, atau langganan bulanan sebagai produk yang dijual.\n\nPostingan WAJIB:\n- Fokus ke paket yang disebut di angle, dengan harga & kuota PERSIS dari informasi produk (pakai angka \"setara\" yang tersedia, dilarang menghitung sendiri). Dilarang mengarang harga, kuota, stok, atau nama paket.\n- Menyebut 9inference.cloud\n\nWAJIB mengakhiri setiap posting dengan link berikut pada baris terpisah:\nhttps://9inference.cloud/pricing\n\nReturn HANYA postingan final dalam Bahasa Indonesia.",
     "userPromptTemplate": "Buat postingan Threads/X dengan angle: {{topic}}.\n\nInformasi produk:\n{{detail}}\n\nPenutup:\n{{cta}}\n\nBalas HANYA dengan postingan final dalam Bahasa Indonesia.",
     "temperature": 0.85,
     "maxTokens": 300,
@@ -31,6 +31,7 @@
     "https://i.ibb.co/zWpxSRx3/Screenshot-2026-08-07-102303.png"
   ],
   "imageMode": "random",
+  "threadsTopic": "AI Threads",
   "topics": [
     "Paket Coding Lite",
     "Paket Coding Pro",
@@ -43,12 +44,13 @@
     "Paket Nemotron 3 Ultra",
     "Paket Kimi-k3"
   ],
-  "topicMode": "random",
+  "topicMode": "sequential",
   "schedule": {
     "enabled": true,
-    "cron": "0 * * * *",
+    "cron": "*/30 * * * *",
     "postsPerRun": 1,
     "runOnStart": false,
     "heartbeatMinutes": 5
-  }
+  },
+  "_topicIndex": 2
 }

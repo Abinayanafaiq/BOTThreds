@@ -16,7 +16,8 @@ function pickByMode(list, mode, index = 0) {
 export function resolveTopic(config, override) {
   if (override) return override;
   const topics = config.topics?.length ? config.topics : [config.defaults?.topic || ""];
-  return pickByMode(topics, config.topicMode || "random") || config.defaults?.topic || "";
+  const idx = Number(config._topicIndex || 0);
+  return pickByMode(topics, config.topicMode || "random", idx) || config.defaults?.topic || "";
 }
 
 export function resolveImages(config, overrideUrls) {
@@ -98,7 +99,7 @@ export async function buildDescription(config, env, options = {}) {
           model: env.openRouterModel,
           systemPrompt: config.ai?.systemPrompt || "You are a Threads copywriter.",
           userPrompt:
-            i === 0
+            i === 0 || lastErr?.message !== "AI_META_DUMP"
               ? userPrompt
               : `${userPrompt}\n\nULANGI. Jawab HANYA caption final berbahasa Indonesia. Jangan tulis constraint, count characters, drafting, atau penjelasan.`,
           temperature: (config.ai?.temperature ?? 0.85) + i * 0.05,
@@ -111,7 +112,11 @@ export async function buildDescription(config, env, options = {}) {
         };
       } catch (err) {
         lastErr = err;
-        if (err.message !== "AI_META_DUMP") break;
+        // rate limit / server error: tunggu sebentar lalu coba lagi
+        const status = err.response?.status;
+        if ((status === 429 || status >= 500) && i < attempts - 1) {
+          await new Promise((r) => setTimeout(r, 10000));
+        }
       }
     }
 

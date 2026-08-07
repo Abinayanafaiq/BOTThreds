@@ -25,7 +25,8 @@ Isi `.env`:
 | Field | Fungsi |
 |-------|--------|
 | `contentMode` | `"ai"` atau `"template"` |
-| `topics` + `topicMode` | daftar topik; `random` / `sequential` / `first` |
+| `threadsTopic` | grup/topik Threads tempat post masuk (tetap), mis. `"AI Threads"` |
+| `topics` + `topicMode` | daftar angle caption; `random` / `sequential` / `first` |
 | `images` + `imageMode` | URL gambar; `random` / `sequential` / `all` (album) |
 | `template.name` | nama pack di `templates.json` |
 | `cta`, `productDetail` | dipakai di template & prompt AI |

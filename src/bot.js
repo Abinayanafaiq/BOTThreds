@@ -55,7 +55,7 @@ export async function createPost(options = {}) {
     type,
     title: options.title ?? config.defaults?.title ?? "",
     description,
-    topic: options.topic ?? topic,
+    topic: options.topic ?? config.threadsTopic ?? topic,
     mediaUrls,
     isAiGenerated: options.isAiGenerated ?? config.defaults?.isAiGenerated ?? mode === "ai",
     isDraft: options.isDraft ?? config.defaults?.isDraft ?? false,
@@ -91,16 +91,23 @@ export async function createPost(options = {}) {
   });
   log.debug("Repliz raw result", result);
 
-  // advance sequential image index
+  // advance sequential image/topic index
+  let dirty = false;
   if (config.imageMode === "sequential" && config.images?.length) {
     config._imageIndex = (Number(config._imageIndex || 0) + 1) % config.images.length;
-    saveConfig(config);
+    dirty = true;
   }
+  if (config.topicMode === "sequential" && config.topics?.length) {
+    config._topicIndex = (Number(config._topicIndex || 0) + 1) % config.topics.length;
+    dirty = true;
+  }
+  if (dirty) saveConfig(config);
 
   return {
     ok: true,
     mode,
     topic: body.topic,
+    angle: topic,
     type: body.type,
     scheduleAt: body.scheduleAt,
     description: body.description,
@@ -147,6 +154,7 @@ export function listSettings() {
   const config = loadConfig();
   return {
     contentMode: config.contentMode,
+    threadsTopic: config.threadsTopic,
     topicMode: config.topicMode,
     topics: config.topics,
     imageMode: config.imageMode,
