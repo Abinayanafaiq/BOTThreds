@@ -1,14 +1,11 @@
 {
-  "token-murah": {
+  "paket-coding": {
     "variants": [
-      "API AI mahal? Coba hitung dulu 👀\n\nDi 9inference.cloud token AI mulai Rp1.000 per 1 juta token.\nCocok buat dev, bot, content, dan eksperimen tanpa takut bill meledak.\n\n{{cta}}",
-      "Mau pakai AI tapi budget tipis?\n\nToken AI murah di 9inference.cloud — mulai Rp1.000 / 1jt token.\n{{detail}}\n\n{{cta}}",
-      "Quick tip hemat AI 💡\n\nJangan bayar mahal cuma buat testing/chatbot.\nPakai token murah di 9inference.cloud (mulai Rp1.000 per 1jt token).\n\n{{cta}}",
-      "Dev yang sering nge-hit API pasti ngerasain: saldo abis duluan 😅\n\nSolusi: 9inference.cloud\nToken AI mulai Rp1.000 / 1 juta token.\n\n{{cta}}",
-      "Perbandingan simpel:\n❌ API premium = bill tak terduga\n✅ 9inference.cloud = mulai Rp1.000 / 1jt token\n\nBuat {{topic}}, ini opsi hemat.\n\n{{cta}}",
-      "UMKM & creator yang pakai AI buat konten/chat customer:\nmodal kecil, output besar.\n\nToken AI di 9inference.cloud mulai Rp1.000 per 1 juta token.\n\n{{cta}}",
-      "Butuh token AI tanpa ribet?\n\n9inference.cloud — mulai Rp1.000 / 1jt token.\n{{detail}}\n\n{{cta}}",
-      "Kalau tiap eksperimen AI bikin dompet menangis… ganti sumber tokennya.\n\n9inference.cloud | mulai Rp1.000 per 1 juta token.\n\n{{cta}}"
+      "Ngoding dibantu AI assistant tiap hari? Biayanya bisa ditekan 👇\n\nPaket Coding 9inference.cloud:\n• Lite Rp8.000 — 10 jt token\n• Pro Rp24.000 — 30 jt token\n• Turbo Rp40.000 — 50 jt token\n\nSekali bayar, aktif 24 jam, semua model coding (GLM, DeepSeek, Qwen, Kimi).\n\n{{cta}}",
+      "{{detail}}\n\n{{cta}}",
+      "Tips hemat buat AI builder 💡\n\nGak perlu langganan coding assistant mahal.\nPaket Coding 9inference.cloud: sekali bayar, kuota jutaan token, aktif 24 jam.\nMulai Rp8.000.\n\n{{cta}}",
+      "Buat {{topic}}:\nlangganan bulanan bukan satu-satunya jalan.\n\nPaket Coding 9inference.cloud — Lite Rp8.000, Pro Rp24.000, Turbo Rp40.000.\nKuota jutaan token, aktif 24 jam, API key khusus.\n\n{{cta}}",
+      "Coding assistant jalan terus, tagihan tetap aman.\n\nPaket Coding 9inference.cloud: 10–50 juta token, Rp8.000–Rp40.000, aktif 24 jam.\nSemua model coding populer bisa dipakai.\n\n{{cta}}"
     ]
   },
   "pain-point": {

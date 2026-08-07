@@ -113,10 +113,8 @@ async function main() {
           console.error("Scheduler tidak start (enabled=false?). Cek config.json schedule.enabled");
           process.exit(1);
         }
-        console.log("Bot running. Ctrl+C to stop.");
-        console.log("Debug: set LOG_LEVEL=debug untuk log lebih detail.");
-        console.log("Debug: set schedule.runOnStart=true untuk fire segera saat start.");
-        console.log("Debug: heartbeat tiap schedule.heartbeatMinutes (default 5).");
+        console.log("Bot jalan. Ctrl+C untuk stop.");
+        console.log("Tips: LOG_LEVEL=debug untuk detail • schedule.runOnStart=true untuk post langsung saat start.");
         // keep alive
         await new Promise(() => {});
         break;

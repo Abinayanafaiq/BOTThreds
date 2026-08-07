@@ -1,7 +1,7 @@
 {
   "defaults": {
     "type": "image",
-    "topic": "AI API Murah",
+    "topic": "Paket AI 9inference",
     "title": "",
     "isAiGenerated": true,
     "isDraft": false,
@@ -9,11 +9,11 @@
     "scheduleLeadMinutes": 5,
     "maxDescriptionLength": 500
   },
-  "cta": "Mulai dari Rp240 / 1 juta token.\nBayar pakai QRIS.\nhttps://9inference.cloud/pricing",
-  "productDetail": "Akses berbagai model AI melalui 9inference.cloud dengan harga mulai Rp240 per 1 juta token, Rp2.400 per 10 juta token, dan Rp24.000 per 100 juta token. Cocok untuk AI agent, coding assistant, chatbot, automation, hingga aplikasi production. Tanpa langganan, cukup top up sesuai kebutuhan. Pembayaran mendukung USDT di BNB Smart Chain (BSC).",
+  "cta": "Paket AI mulai Rp8.000.\nBayar pakai QRIS.\nhttps://9inference.cloud/pricing",
+  "productDetail": "Katalog paket 9inference.cloud (sekali bayar, kuota token input+output, API key khusus per paket, kompatibel OpenAI SDK, bayar bisa QRIS):\n\nPaket Coding — semua model coding, aktif 24 jam:\n- Coding Lite Rp8.000 (10 juta token)\n- Coding Pro Rp24.000 (30 juta token)\n- Coding Turbo Rp40.000 (50 juta token)\n\nPaket per model:\n- Nemotron 3 Ultra Rp12.000 (50 juta token, 24 jam)\n- GLM 5.2 Rp14.000 (25 juta token, 2 hari)\n- DeepSeek V4 Pro Rp14.000 (25 juta token, 2 hari)\n- gpt-oss-120b Rp15.000 (90 juta token, 24 jam)\n- Qwen3.7 Rp17.000 (50 juta token, 24 jam)\n- DeepSeek V4 Flash 0731 Rp18.000 (50 juta token, 24 jam)\n- GLM 5.2 Rp25.000 (50 juta token, 24 jam)\n- DeepSeek V4 Flash 0731 Rp35.000 (100 juta token, 24 jam)\n- Kimi-k3 Rp14.000 (11 juta token, 24 jam)\n- Kimi-k3 Rp38.000 (50 juta token, 24 jam)",
   "contentMode": "ai",
   "ai": {
-    "systemPrompt": "Role: Penulis konten Threads/X berbahasa Indonesia untuk developer, AI builder, startup founder, dan indie hacker.\n\nReturn HANYA teks postingan final.\n\nAturan:\n- Gaya tulisan selalu berbeda.\n- Soft selling.\n- Maksimal 450 karakter.\n- 3-6 baris.\n- Terdengar seperti developer berbagi tips, bukan iklan.\n\nPostingan WAJIB menyebut:\n- Mulai Rp240 per 1 juta token\n- Rp2.400 per 10 juta token\n- Rp24.000 per 100 juta token\n- 9inference.cloud\n\nBoleh menyebut manfaat seperti:\n- Tanpa langganan\n- Top up sesuai kebutuhan\n- Cocok untuk AI Agent\n- Cocok untuk coding assistant\n- Production-ready\n- Lebih hemat\n- Startup-friendly\n- Chatbot & automation\n\nWAJIB mengakhiri setiap posting dengan link berikut pada baris terpisah:\nhttps://9inference.cloud/pricing\n\nReturn HANYA postingan final dalam Bahasa Indonesia.",
+    "systemPrompt": "Role: Penulis konten Threads/X berbahasa Indonesia untuk developer, AI builder, startup founder, dan indie hacker.\n\nReturn HANYA teks postingan final.\n\nAturan:\n- Gaya tulisan selalu berbeda.\n- Soft selling.\n- RINGKAS: maksimal 300 karakter, 3-4 baris. Orang malas baca teks panjang.\n- Hook maksimal 1 kalimat pendek, langsung ke paket + harga.\n- Tanpa basa-basi, tanpa penjelasan bertele-tele.\n- Terdengar seperti developer berbagi tips, bukan iklan.\n- JANGAN menyebut pay-as-you-go, top up saldo, atau harga per token.\n\nYang dijual: PAKET AI — kuota token sekali bayar dengan API key khusus.\n\nPostingan WAJIB:\n- Fokus ke paket yang disebut di angle, dengan harga & kuota PERSIS dari informasi produk. Dilarang mengarang harga, kuota, atau nama paket di luar informasi produk.\n- Boleh menyebut 1-2 paket lain sebagai pembanding, harga harus persis dari informasi produk.\n- Menyebut 9inference.cloud\n\nBoleh menyebut manfaat seperti:\n- Sekali bayar, aktif 24 jam (atau 2 hari untuk paket 2 hari)\n- Cocok untuk coding assistant (Cursor/CLI agent)\n- Cocok untuk AI agent & automation\n- Kompatibel OpenAI SDK\n- Lebih hemat dari langganan bulanan\n- API key khusus per paket\n- Bayar bisa QRIS\n\nWAJIB mengakhiri setiap posting dengan link berikut pada baris terpisah:\nhttps://9inference.cloud/pricing\n\nReturn HANYA postingan final dalam Bahasa Indonesia.",
     "userPromptTemplate": "Buat postingan Threads/X dengan angle: {{topic}}.\n\nInformasi produk:\n{{detail}}\n\nPenutup:\n{{cta}}\n\nBalas HANYA dengan postingan final dalam Bahasa Indonesia.",
     "temperature": 0.85,
     "maxTokens": 300,
@@ -21,15 +21,27 @@
     "fallbackTemplate": true
   },
   "template": {
-    "name": "token-murah",
+    "name": "paket-coding",
     "variant": "random"
   },
   "images": [
-    "https://i.ibb.co/4RmvSfVN/Screenshot-2026-08-07-075311.png"
+    "https://i.ibb.co/4RmvSfVN/Screenshot-2026-08-07-075311.png",
+    "https://i.ibb.co/rKghfZNC/Screenshot-2026-08-07-101945.png",
+    "https://i.ibb.co/TDY9s9hY/Screenshot-2026-08-07-102201.png",
+    "https://i.ibb.co/zWpxSRx3/Screenshot-2026-08-07-102303.png"
   ],
   "imageMode": "random",
   "topics": [
-    "AI API Murah"
+    "Paket Coding Lite",
+    "Paket Coding Pro",
+    "Paket Coding Turbo",
+    "Paket GLM 5.2",
+    "Paket DeepSeek V4 Pro",
+    "Paket DeepSeek V4 Flash 0731",
+    "Paket Qwen3.7",
+    "Paket gpt-oss-120b",
+    "Paket Nemotron 3 Ultra",
+    "Paket Kimi-k3"
   ],
   "topicMode": "random",
   "schedule": {

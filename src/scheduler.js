@@ -60,22 +60,18 @@ function formatNext(expr) {
 function logHeartbeat(expr) {
   const uptime = startedAt ? ms(Date.now() - startedAt) : "?";
   const next = formatNext(expr);
-  log.info("heartbeat (process alive)", {
+  log.info("heartbeat (proses hidup)", {
     uptime,
-    cron: expr,
     nextRun: next.nextLocal || next.nextIn,
     nextIn: next.nextIn,
-    nextIso: next.nextIso,
-    lastTick: lastTickAt,
-    lastRun: lastRunAt,
-    lastRunOk,
-    lastError,
-    runs: runCount,
-    ok: okCount,
-    err: errCount,
-    busy: running,
-    pid: process.pid,
-    memoryMb: Math.round(process.memoryUsage().rss / 1024 / 1024),
+    lastRun: lastRunAt
+      ? new Date(lastRunAt).toLocaleString("id-ID", { hour12: false })
+      : "-",
+    lastOk: lastRunOk === null ? "-" : lastRunOk ? "ya" : "TIDAK",
+    lastError: lastError || undefined,
+    total: `${runCount} run (ok ${okCount} / gagal ${errCount})`,
+    sibuk: running ? "ya" : "tidak",
+    memori: `${Math.round(process.memoryUsage().rss / 1024 / 1024)} MB`,
   });
 }
 
@@ -90,11 +86,8 @@ async function executeRun(postsPerRun, reason) {
   const runId = runCount;
   const t0 = Date.now();
 
-  log.info(`tick #${runId} (${reason})`, {
-    postsPerRun,
-    at: lastTickAt,
-    local: new Date().toLocaleString("id-ID", { hour12: false }),
-  });
+  console.log("");
+  log.info(`tick #${runId} (${reason}) — mulai ${postsPerRun} post`);
 
   let runOk = true;
   for (let i = 0; i < postsPerRun; i++) {
@@ -106,13 +99,13 @@ async function executeRun(postsPerRun, reason) {
       okCount += 1;
       lastRunOk = true;
       lastError = null;
-      log.info(`post ${n}/${postsPerRun} ok (${ms(Date.now() - tPost)})`, {
+      log.info(`post ${n}/${postsPerRun} OK (${ms(Date.now() - tPost)})`, {
         topic: res.topic,
-        scheduleAt: res.scheduleAt,
         mode: res.mode,
         type: res.type,
-        medias: res.medias?.length || 0,
-        preview: (res.description || "").slice(0, 100),
+        media: res.medias?.length || 0,
+        tayang: new Date(res.scheduleAt).toLocaleString("id-ID", { hour12: false }),
+        caption: res.description,
       });
     } catch (err) {
       runOk = false;
@@ -121,20 +114,19 @@ async function executeRun(postsPerRun, reason) {
       lastError = err.response?.data
         ? JSON.stringify(err.response.data)
         : err.message;
-      log.error(`post ${n}/${postsPerRun} failed (${ms(Date.now() - tPost)})`, {
-        message: err.message,
+      log.error(`post ${n}/${postsPerRun} GAGAL (${ms(Date.now() - tPost)})`, {
+        error: err.message,
         status: err.response?.status,
-        data: err.response?.data || null,
+        detail: err.response?.data ? JSON.stringify(err.response.data) : undefined,
       });
     }
   }
 
   lastRunAt = new Date().toISOString();
   running = false;
-  log.info(`tick #${runId} done (${ms(Date.now() - t0)})`, {
-    ok: runOk,
-    totals: { runs: runCount, ok: okCount, err: errCount },
-  });
+  log.info(
+    `tick #${runId} selesai (${ms(Date.now() - t0)}) — total ok ${okCount}, gagal ${errCount}`
+  );
 }
 
 export function startScheduler() {
@@ -177,20 +169,14 @@ export function startScheduler() {
   running = false;
 
   const next = formatNext(expr);
-  log.info("starting", {
+  log.info("scheduler aktif", {
     cron: expr,
     postsPerRun,
-    runOnStart,
-    heartbeatMinutes,
+    heartbeat: `${heartbeatMinutes}m`,
     timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-    offsetMin: -new Date().getTimezoneOffset(),
-    nowIso: new Date().toISOString(),
-    nowLocal: new Date().toLocaleString("id-ID", { hour12: false }),
+    sekarang: new Date().toLocaleString("id-ID", { hour12: false }),
     nextRun: next.nextLocal,
     nextIn: next.nextIn,
-    pid: process.pid,
-    node: process.version,
-    platform: process.platform,
   });
 
   if (!next.nextIso && !expr.includes("*/")) {
@@ -209,22 +195,19 @@ export function startScheduler() {
     heartbeatTimer = setInterval(() => logHeartbeat(expr), every);
     // first heartbeat shortly after start so user sees process is alive
     setTimeout(() => logHeartbeat(expr), 3000);
-    log.info(`heartbeat every ${heartbeatMinutes}m (if missing, process was killed/frozen)`);
+    log.info(`heartbeat tiap ${heartbeatMinutes}m (kalau tidak muncul = proses mati/freeze)`);
   }
 
   if (runOnStart) {
-    log.info("runOnStart=true — posting now");
+    log.info("runOnStart=true — posting sekarang");
     executeRun(postsPerRun, "runOnStart").catch((err) => {
       log.error("runOnStart failed", err.message);
       running = false;
     });
   } else {
-    log.info("waiting for first cron fire (no post at start)", {
-      hint: "set schedule.runOnStart=true to post immediately, or use */1 * * * * to test",
-    });
+    log.info("menunggu cron pertama (tidak post saat start)");
   }
 
-  log.info(`started cron="${expr}" postsPerRun=${postsPerRun}`);
   return task;
 }
 

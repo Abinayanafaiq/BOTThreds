@@ -18,14 +18,40 @@ function localStamp() {
   }
 }
 
-function fmt(scope, level, msg, extra) {
-  const base = `[${stamp()}] [${level.toUpperCase()}] [${scope}] ${msg}`;
-  if (extra === undefined) return base;
-  if (typeof extra === "string") return `${base} ${extra}`;
+function timeStamp() {
   try {
-    return `${base} ${JSON.stringify(extra)}`;
+    return new Date().toLocaleTimeString("id-ID", { hour12: false });
   } catch {
-    return `${base} ${String(extra)}`;
+    return new Date().toISOString();
+  }
+}
+
+function fmtValue(v, blockIndent) {
+  // Multi-line strings (e.g. captions) rendered as an indented block
+  if (typeof v === "string" && v.includes("\n")) {
+    return "\n" + v.split("\n").map((l) => `${blockIndent}${l}`).join("\n");
+  }
+  if (v && typeof v === "object") return JSON.stringify(v);
+  return String(v);
+}
+
+function fmt(scope, level, msg, extra) {
+  const head = `[${timeStamp()}] ${level.toUpperCase().padEnd(5)} [${scope}] ${msg}`;
+  if (extra === undefined) return head;
+  if (typeof extra === "string") return `${head} ${extra}`;
+  try {
+    const entries = Object.entries(extra).filter(
+      ([, v]) => v !== undefined && v !== null
+    );
+    if (!entries.length) return head;
+    const width = Math.max(...entries.map(([k]) => k.length));
+    const lines = entries.map(([k, v]) => {
+      const pad = `  ${k.padEnd(width)} : `;
+      return `${pad}${fmtValue(v, " ".repeat(pad.length))}`;
+    });
+    return [head, ...lines].join("\n");
+  } catch {
+    return `${head} ${String(extra)}`;
   }
 }
 
