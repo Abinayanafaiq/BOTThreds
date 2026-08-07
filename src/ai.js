@@ -126,14 +126,15 @@ export function cleanCaption(text) {
   }
   s = kept.join("\n").replace(/\n{3,}/g, "\n\n").trim();
 
-  // Take best paragraph candidate
-  const parts = s
+  // Take best paragraph candidate — ONLY if some paragraphs were dropped
+  // as meta dumps. Clean multi-paragraph captions must be kept whole.
+  const allParts = s
     .split(/\n{2,}/)
     .map((p) => p.trim())
-    .filter(Boolean)
-    .filter((p) => !looksLikeMetaDump(p));
+    .filter(Boolean);
+  const parts = allParts.filter((p) => !looksLikeMetaDump(p));
 
-  if (parts.length) {
+  if (parts.length && parts.length < allParts.length) {
     // Prefer Indonesian promo-ish block with product keywords
     const scored = parts
       .map((p) => {

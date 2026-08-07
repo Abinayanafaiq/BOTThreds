@@ -1,7 +1,7 @@
 {
   "defaults": {
     "type": "image",
-    "topic": "AI Threads",
+    "topic": "AI API Murah",
     "title": "",
     "isAiGenerated": true,
     "isDraft": false,
@@ -9,14 +9,14 @@
     "scheduleLeadMinutes": 5,
     "maxDescriptionLength": 500
   },
-  "cta": "Coba di 9inference.cloud — mulai Rp1.000 / 1jt token 🔥",
-  "productDetail": "Token AI murah di 9inference.cloud. Mulai Rp1.000 per 1 juta token. Buat dev, creator, chatbot, bisnis.",
+  "cta": "Mulai dari Rp240 / 1 juta token.\nBayar pakai QRIS.\nhttps://9inference.cloud/pricing",
+  "productDetail": "Akses berbagai model AI melalui 9inference.cloud dengan harga mulai Rp240 per 1 juta token, Rp2.400 per 10 juta token, dan Rp24.000 per 100 juta token. Cocok untuk AI agent, coding assistant, chatbot, automation, hingga aplikasi production. Tanpa langganan, cukup top up sesuai kebutuhan. Pembayaran mendukung USDT di BNB Smart Chain (BSC).",
   "contentMode": "ai",
   "ai": {
-    "systemPrompt": "Role: Expert Threads copywriter (Bahasa Indonesia) yang memahami psikologi pemasaran.\n\nReturn ONLY the final post text.\nForbidden: English notes, explanations, markdown, drafting, constraints list, character counting, 'Line 1', reasoning.\n\nSetiap post WAJIB menggunakan minimal 2 teknik psikologi secara natural dan acak agar tidak monoton. Pilih kombinasi dari:\n- Curiosity Gap\n- FOMO\n- Social Proof\n- Authority\n- Loss Aversion\n- Anchoring\n- Value Framing\n- Reciprocity\n- Pattern Interrupt\n- Future Pacing\n\nAturan:\n- Jangan mengulang pola kalimat yang sama.\n- Variasikan hook, panjang kalimat, dan gaya penulisan setiap post.\n- Terasa seperti pengalaman pribadi, opini, atau tips, bukan iklan.\n- Hook pertama harus membuat orang berhenti scroll.\n- Soft selling, jangan terdengar memaksa.\n- Fokus pada manfaat yang didapat pembaca.\n- Gunakan bahasa santai khas Threads Indonesia.\n- 3-6 baris.\n- Maksimal 450 karakter.\n\nWAJIB menyebut:\n- Rp1.000/1jt token\n- 9inference.cloud\n\nAkhiri dengan CTA ringan yang mengundang rasa penasaran atau mengajak mencoba.\n\nReturn ONLY isi post dalam Bahasa Indonesia.",
-    "userPromptTemplate": "Buat post Threads dengan angle: {{topic}}.\n\nInformasi produk:\n{{detail}}\n\nPenutup:\n{{cta}}\n\nBalas HANYA isi post dalam Bahasa Indonesia.",
-    "temperature": 0.8,
-    "maxTokens": 200,
+    "systemPrompt": "Role: Penulis konten Threads/X berbahasa Indonesia untuk developer, AI builder, startup founder, dan indie hacker.\n\nReturn HANYA teks postingan final.\n\nAturan:\n- Gaya tulisan selalu berbeda.\n- Soft selling.\n- Maksimal 450 karakter.\n- 3-6 baris.\n- Terdengar seperti developer berbagi tips, bukan iklan.\n\nPostingan WAJIB menyebut:\n- Mulai Rp240 per 1 juta token\n- Rp2.400 per 10 juta token\n- Rp24.000 per 100 juta token\n- 9inference.cloud\n\nBoleh menyebut manfaat seperti:\n- Tanpa langganan\n- Top up sesuai kebutuhan\n- Cocok untuk AI Agent\n- Cocok untuk coding assistant\n- Production-ready\n- Lebih hemat\n- Startup-friendly\n- Chatbot & automation\n\nWAJIB mengakhiri setiap posting dengan link berikut pada baris terpisah:\nhttps://9inference.cloud/pricing\n\nReturn HANYA postingan final dalam Bahasa Indonesia.",
+    "userPromptTemplate": "Buat postingan Threads/X dengan angle: {{topic}}.\n\nInformasi produk:\n{{detail}}\n\nPenutup:\n{{cta}}\n\nBalas HANYA dengan postingan final dalam Bahasa Indonesia.",
+    "temperature": 0.85,
+    "maxTokens": 300,
     "retries": 2,
     "fallbackTemplate": true
   },
@@ -25,20 +25,18 @@
     "variant": "random"
   },
   "images": [
-    "https://i.ibb.co/6JHTH0VF/Screenshot-2026-07-20-223632.png"
+    "https://i.ibb.co/4RmvSfVN/Screenshot-2026-08-07-075311.png"
   ],
   "imageMode": "random",
   "topics": [
-    "AI Threads",
-    "bansos AI"
+    "AI API Murah"
   ],
   "topicMode": "random",
   "schedule": {
     "enabled": true,
-    "cron": "*/15 * * * *",
+    "cron": "*/30 * * * *",
     "postsPerRun": 1,
     "runOnStart": false,
     "heartbeatMinutes": 5
-  },
-  "queue": []
+  }
 }
