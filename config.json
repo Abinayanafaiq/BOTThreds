@@ -34,7 +34,7 @@
   "topicMode": "random",
   "schedule": {
     "enabled": true,
-    "cron": "*/30 * * * *",
+    "cron": "0 * * * *",
     "postsPerRun": 1,
     "runOnStart": false,
     "heartbeatMinutes": 5
