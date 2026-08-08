@@ -1,7 +1,7 @@
 #!/usr/bin/env node
-import { createPost, processQueue, listSettings, updateSettings } from "./bot.js";
-import { startScheduler } from "./scheduler.js";
-import { loadConfig, saveConfig, loadTemplates, saveTemplates } from "./config.js";
+const { createPost, processQueue, listSettings, updateSettings } = require("./bot.js");
+const { startScheduler } = require("./scheduler.js");
+const { loadConfig, saveConfig, loadTemplates, saveTemplates } = require("./config.js");
 
 const [,, cmd, ...rest] = process.argv;
 
@@ -205,7 +205,7 @@ async function main() {
         process.exit(1);
     }
   } catch (err) {
-    console.error("Error:", err.response?.data || err.message);
+    console.error("Error:", (err.response && err.response.data) || err.message);
     process.exit(1);
   }
 }

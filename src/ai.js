@@ -1,9 +1,9 @@
-import axios from "axios";
+const axios = require("axios");
 
 /**
  * Generate caption via OpenRouter
  */
-export async function generateWithOpenRouter({
+async function generateWithOpenRouter({
   apiKey,
   model,
   systemPrompt,
@@ -37,7 +37,10 @@ export async function generateWithOpenRouter({
     }
   );
 
-  const raw = data?.choices?.[0]?.message?.content?.trim();
+  const choices = data && data.choices;
+  const message = choices && choices[0] && choices[0].message;
+  const content = message && message.content;
+  const raw = content == null ? "" : String(content).trim();
   if (!raw) throw new Error("OpenRouter returned empty content");
   return cleanCaption(raw);
 }
@@ -102,7 +105,7 @@ function looksLikeMetaDump(text) {
 }
 
 /** Strip model reasoning / meta dump so only post-ready caption remains */
-export function cleanCaption(text) {
+function cleanCaption(text) {
   let s = String(text || "")
     .replace(/\r\n/g, "\n")
     .replace(/```[\s\S]*?```/g, "")
@@ -111,7 +114,7 @@ export function cleanCaption(text) {
 
   // Prefer content after markers like "Caption:" / "Final:"
   const marker = s.match(/(?:^|\n)\s*(?:final\s*)?caption\s*:\s*\n?([\s\S]+)$/i);
-  if (marker?.[1]) s = marker[1].trim();
+  if (marker && marker[1]) s = marker[1].trim();
 
   const lines = s.split("\n");
   const kept = [];
@@ -146,7 +149,7 @@ export function cleanCaption(text) {
         return { p, score };
       })
       .sort((a, b) => b.score - a.score);
-    if (scored[0]?.score > 0) s = scored[0].p;
+    if (scored[0] && scored[0].score > 0) s = scored[0].p;
   }
 
   if (
@@ -163,8 +166,10 @@ export function cleanCaption(text) {
   return s;
 }
 
-export function fillPlaceholders(str, vars) {
-  return String(str).replace(/\{\{(\w+)\}\}/g, (_, key) =>
+function fillPlaceholders(str, vars) {
+  return String(str).replace(/\{\{(\w+)\}\}/g, (match, key) =>
     vars[key] != null ? String(vars[key]) : ""
   );
 }
+
+module.exports = { generateWithOpenRouter, cleanCaption, fillPlaceholders };

@@ -1,8 +1,8 @@
-import axios from "axios";
+const axios = require("axios");
 
 const BASE_URL = "https://api.repliz.com/public";
 
-export function createReplizClient({ accessKey, secretKey }) {
+function createReplizClient({ accessKey, secretKey }) {
   const client = axios.create({
     baseURL: BASE_URL,
     auth: { username: accessKey, password: secretKey },
@@ -25,7 +25,7 @@ export function createReplizClient({ accessKey, secretKey }) {
 /**
  * Build Repliz request body for Threads image/text post
  */
-export function buildScheduleBody({
+function buildScheduleBody({
   accountId,
   scheduleAt,
   type = "image",
@@ -78,3 +78,5 @@ export function buildScheduleBody({
     scheduleAt,
   };
 }
+
+module.exports = { createReplizClient, buildScheduleBody };

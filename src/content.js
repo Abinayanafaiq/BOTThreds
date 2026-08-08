@@ -1,27 +1,28 @@
-import { generateWithOpenRouter, fillPlaceholders } from "./ai.js";
-import { loadTemplates } from "./config.js";
+const { generateWithOpenRouter, fillPlaceholders } = require("./ai.js");
+const { loadTemplates } = require("./config.js");
 
 function pickRandom(arr) {
-  if (!arr?.length) return null;
+  if (!arr || !arr.length) return null;
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
 function pickByMode(list, mode, index = 0) {
-  if (!list?.length) return null;
+  if (!list || !list.length) return null;
   if (mode === "sequential") return list[index % list.length];
   if (mode === "first") return list[0];
   return pickRandom(list);
 }
 
-export function resolveTopic(config, override) {
+function resolveTopic(config, override) {
   if (override) return override;
-  const topics = config.topics?.length ? config.topics : [config.defaults?.topic || ""];
+  const defaults = config.defaults || {};
+  const topics = config.topics && config.topics.length ? config.topics : [defaults.topic || ""];
   const idx = Number(config._topicIndex || 0);
-  return pickByMode(topics, config.topicMode || "random", idx) || config.defaults?.topic || "";
+  return pickByMode(topics, config.topicMode || "random", idx) || defaults.topic || "";
 }
 
-export function resolveImages(config, overrideUrls) {
-  if (overrideUrls?.length) return overrideUrls;
+function resolveImages(config, overrideUrls) {
+  if (overrideUrls && overrideUrls.length) return overrideUrls;
   const images = config.images || [];
   if (!images.length) return [];
   if (config.imageMode === "all") return [...images];
@@ -33,14 +34,15 @@ export function resolveImages(config, overrideUrls) {
   return one ? [one] : [];
 }
 
-export function resolveFromTemplate(config, vars) {
+function resolveFromTemplate(config, vars) {
   const templates = loadTemplates();
-  const name = config.template?.name || Object.keys(templates)[0];
+  const templateCfg = config.template || {};
+  const name = templateCfg.name || Object.keys(templates)[0];
   const pack = templates[name];
-  if (!pack?.variants?.length) {
+  if (!pack || !pack.variants || !pack.variants.length) {
     throw new Error(`Template "${name}" not found or empty. Edit templates.json`);
   }
-  let variant = config.template?.variant;
+  const variant = templateCfg.variant;
   let text;
   if (variant === "random" || variant == null || variant === "") {
     text = pickRandom(pack.variants);
@@ -55,7 +57,7 @@ export function resolveFromTemplate(config, vars) {
 const MAX_DESCRIPTION = 500;
 
 /** Hard-limit caption for Repliz/Threads (max 500 chars) */
-export function clampDescription(text, max = MAX_DESCRIPTION) {
+function clampDescription(text, max = MAX_DESCRIPTION) {
   const s = String(text || "").trim();
   if (s.length <= max) return s;
   const cut = s.slice(0, max - 1);
@@ -64,7 +66,7 @@ export function clampDescription(text, max = MAX_DESCRIPTION) {
   return (base.length <= max ? base : base.slice(0, max - 1)).replace(/[,:;.\-\s]+$/, "") + "…";
 }
 
-export async function buildDescription(config, env, options = {}) {
+async function buildDescription(config, env, options = {}) {
   const topic = resolveTopic(config, options.topic);
   const vars = {
     topic,
@@ -73,7 +75,9 @@ export async function buildDescription(config, env, options = {}) {
   };
 
   const mode = options.mode || config.contentMode || "template";
-  const maxLen = Number(config.defaults?.maxDescriptionLength || MAX_DESCRIPTION);
+  const defaults = config.defaults || {};
+  const aiCfg = config.ai || {};
+  const maxLen = Number(defaults.maxDescriptionLength || MAX_DESCRIPTION);
 
   if (options.description) {
     return {
@@ -85,25 +89,25 @@ export async function buildDescription(config, env, options = {}) {
 
   if (mode === "ai") {
     const userPrompt = fillPlaceholders(
-      config.ai?.userPromptTemplate ||
+      aiCfg.userPromptTemplate ||
         "Buat caption Threads. Topik: {{topic}}. Detail: {{detail}}. CTA: {{cta}}",
       vars
     );
 
-    const attempts = Number(config.ai?.retries ?? 2);
+    const attempts = Number(aiCfg.retries != null ? aiCfg.retries : 2);
     let lastErr;
     for (let i = 0; i < attempts; i++) {
       try {
         const description = await generateWithOpenRouter({
           apiKey: env.openRouterKey,
           model: env.openRouterModel,
-          systemPrompt: config.ai?.systemPrompt || "You are a Threads copywriter.",
+          systemPrompt: aiCfg.systemPrompt || "You are a Threads copywriter.",
           userPrompt:
-            i === 0 || lastErr?.message !== "AI_META_DUMP"
+            i === 0 || !lastErr || lastErr.message !== "AI_META_DUMP"
               ? userPrompt
               : `${userPrompt}\n\nULANGI. Jawab HANYA caption final berbahasa Indonesia. Jangan tulis constraint, count characters, drafting, atau penjelasan.`,
-          temperature: (config.ai?.temperature ?? 0.85) + i * 0.05,
-          maxTokens: config.ai?.maxTokens ?? 200,
+          temperature: (aiCfg.temperature != null ? aiCfg.temperature : 0.85) + i * 0.05,
+          maxTokens: aiCfg.maxTokens != null ? aiCfg.maxTokens : 200,
         });
         return {
           description: clampDescription(description, maxLen),
@@ -113,7 +117,7 @@ export async function buildDescription(config, env, options = {}) {
       } catch (err) {
         lastErr = err;
         // rate limit / server error: tunggu sebentar lalu coba lagi
-        const status = err.response?.status;
+        const status = err.response && err.response.status;
         if ((status === 429 || status >= 500) && i < attempts - 1) {
           await new Promise((r) => setTimeout(r, 10000));
         }
@@ -121,13 +125,13 @@ export async function buildDescription(config, env, options = {}) {
     }
 
     // Fallback template if model keeps dumping reasoning
-    if (config.ai?.fallbackTemplate !== false) {
+    if (aiCfg.fallbackTemplate !== false) {
       const description = resolveFromTemplate(config, vars);
       return {
         description: clampDescription(description, maxLen),
         topic,
         mode: "template-fallback",
-        aiError: lastErr?.message || "AI_META_DUMP",
+        aiError: (lastErr && lastErr.message) || "AI_META_DUMP",
       };
     }
     throw lastErr || new Error("AI failed to generate caption");
@@ -137,3 +141,11 @@ export async function buildDescription(config, env, options = {}) {
   const description = resolveFromTemplate(config, vars);
   return { description: clampDescription(description, maxLen), topic, mode: "template" };
 }
+
+module.exports = {
+  resolveTopic,
+  resolveImages,
+  resolveFromTemplate,
+  clampDescription,
+  buildDescription,
+};

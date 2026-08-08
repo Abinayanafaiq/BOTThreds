@@ -1,3 +1,15 @@
-export { createPost, processQueue, listSettings, updateSettings } from "./bot.js";
-export { startScheduler, stopScheduler } from "./scheduler.js";
-export { loadConfig, loadEnv, loadTemplates } from "./config.js";
+const { createPost, processQueue, listSettings, updateSettings } = require("./bot.js");
+const { startScheduler, stopScheduler } = require("./scheduler.js");
+const { loadConfig, loadEnv, loadTemplates } = require("./config.js");
+
+module.exports = {
+  createPost,
+  processQueue,
+  listSettings,
+  updateSettings,
+  startScheduler,
+  stopScheduler,
+  loadConfig,
+  loadEnv,
+  loadTemplates,
+};

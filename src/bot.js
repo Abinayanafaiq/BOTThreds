@@ -1,16 +1,26 @@
-import { loadConfig, loadEnv, saveConfig } from "./config.js";
-import { createReplizClient, buildScheduleBody } from "./repliz.js";
-import { buildDescription, resolveImages } from "./content.js";
-import { createLogger, ms } from "./logger.js";
+const { loadConfig, loadEnv, saveConfig } = require("./config.js");
+const { createReplizClient, buildScheduleBody } = require("./repliz.js");
+const { buildDescription, resolveImages } = require("./content.js");
+const { createLogger, ms } = require("./logger.js");
 
 const log = createLogger("bot");
+
+/** First non-null/non-undefined value (replacement for the ?? operator) */
+function coalesce() {
+  for (let i = 0; i < arguments.length; i++) {
+    const v = arguments[i];
+    if (v !== undefined && v !== null) return v;
+  }
+  return undefined;
+}
 
 /**
  * ISO schedule time: now + lead minutes (default from config)
  */
-export function makeScheduleAt(config, scheduleAt) {
+function makeScheduleAt(config, scheduleAt) {
   if (scheduleAt) return new Date(scheduleAt).toISOString();
-  const lead = Number(config.defaults?.scheduleLeadMinutes ?? 5);
+  const defaults = config.defaults || {};
+  const lead = Number(coalesce(defaults.scheduleLeadMinutes, 5));
   const d = new Date(Date.now() + lead * 60 * 1000);
   return d.toISOString();
 }
@@ -18,18 +28,19 @@ export function makeScheduleAt(config, scheduleAt) {
 /**
  * Create one post (immediate schedule via Repliz)
  */
-export async function createPost(options = {}) {
+async function createPost(options = {}) {
   const t0 = Date.now();
   log.debug("createPost start", {
     mode: options.mode,
     topic: options.topic,
     type: options.type,
     hasDescription: Boolean(options.description),
-    images: options.images?.length || 0,
+    images: options.images ? options.images.length : 0,
   });
 
   const env = loadEnv();
   const config = loadConfig();
+  const defaults = config.defaults || {};
   const client = createReplizClient(env);
 
   log.debug("building description...", {
@@ -41,24 +52,24 @@ export async function createPost(options = {}) {
   log.debug("description ready", {
     mode,
     topic,
-    chars: description?.length || 0,
+    chars: description ? description.length : 0,
     duration: ms(Date.now() - descT0),
   });
 
   const mediaUrls = resolveImages(config, options.images);
-  const type = options.type || config.defaults?.type || (mediaUrls.length ? "image" : "text");
+  const type = options.type || defaults.type || (mediaUrls.length ? "image" : "text");
   const scheduleAt = makeScheduleAt(config, options.scheduleAt);
 
   const body = buildScheduleBody({
     accountId: options.accountId || env.accountId,
     scheduleAt,
     type,
-    title: options.title ?? config.defaults?.title ?? "",
+    title: coalesce(options.title, defaults.title, ""),
     description,
-    topic: options.topic ?? config.threadsTopic ?? topic,
+    topic: coalesce(options.topic, config.threadsTopic, topic),
     mediaUrls,
-    isAiGenerated: options.isAiGenerated ?? config.defaults?.isAiGenerated ?? mode === "ai",
-    isDraft: options.isDraft ?? config.defaults?.isDraft ?? false,
+    isAiGenerated: coalesce(options.isAiGenerated, defaults.isAiGenerated, mode === "ai"),
+    isDraft: coalesce(options.isDraft, defaults.isDraft, false),
     replies: options.replies || [],
   });
 
@@ -66,8 +77,8 @@ export async function createPost(options = {}) {
     type: body.type,
     topic: body.topic,
     scheduleAt: body.scheduleAt,
-    medias: body.medias?.length || 0,
-    descChars: body.description?.length || 0,
+    medias: body.medias ? body.medias.length : 0,
+    descChars: body.description ? body.description.length : 0,
     isDraft: body.isDraft,
   });
 
@@ -78,8 +89,8 @@ export async function createPost(options = {}) {
   } catch (err) {
     log.error("Repliz API error", {
       duration: ms(Date.now() - apiT0),
-      status: err.response?.status,
-      data: err.response?.data,
+      status: err.response && err.response.status,
+      data: err.response && err.response.data,
       message: err.message,
     });
     throw err;
@@ -87,17 +98,19 @@ export async function createPost(options = {}) {
   log.info("Repliz OK", {
     duration: ms(Date.now() - apiT0),
     total: ms(Date.now() - t0),
-    resultId: result?.id || result?.data?.id || result?.scheduleId || undefined,
+    resultId: result
+      ? result.id || (result.data && result.data.id) || result.scheduleId || undefined
+      : undefined,
   });
   log.debug("Repliz raw result", result);
 
   // advance sequential image/topic index
   let dirty = false;
-  if (config.imageMode === "sequential" && config.images?.length) {
+  if (config.imageMode === "sequential" && config.images && config.images.length) {
     config._imageIndex = (Number(config._imageIndex || 0) + 1) % config.images.length;
     dirty = true;
   }
-  if (config.topicMode === "sequential" && config.topics?.length) {
+  if (config.topicMode === "sequential" && config.topics && config.topics.length) {
     config._topicIndex = (Number(config._topicIndex || 0) + 1) % config.topics.length;
     dirty = true;
   }
@@ -120,7 +133,7 @@ export async function createPost(options = {}) {
  * Process queue items from config.queue (one-shot jobs)
  * Queue item: { description?, topic?, images?, type?, scheduleAt?, mode?, cta?, detail? }
  */
-export async function processQueue({ limit = Infinity, dryRun = false } = {}) {
+async function processQueue({ limit = Infinity, dryRun = false } = {}) {
   const config = loadConfig();
   const queue = Array.isArray(config.queue) ? [...config.queue] : [];
   if (!queue.length) return { processed: 0, remaining: 0, items: [] };
@@ -150,7 +163,7 @@ export async function processQueue({ limit = Infinity, dryRun = false } = {}) {
   return { processed: items.length, remaining: queue.length, items };
 }
 
-export function listSettings() {
+function listSettings() {
   const config = loadConfig();
   return {
     contentMode: config.contentMode,
@@ -162,12 +175,12 @@ export function listSettings() {
     template: config.template,
     cta: config.cta,
     schedule: config.schedule,
-    queueLength: config.queue?.length || 0,
+    queueLength: (config.queue && config.queue.length) || 0,
     defaults: config.defaults,
   };
 }
 
-export function updateSettings(patch) {
+function updateSettings(patch) {
   const config = loadConfig();
   const next = deepMerge(config, patch);
   saveConfig(next);
@@ -188,3 +201,5 @@ function deepMerge(a, b) {
   }
   return b;
 }
+
+module.exports = { makeScheduleAt, createPost, processQueue, listSettings, updateSettings };

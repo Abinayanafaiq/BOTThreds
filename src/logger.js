@@ -2,7 +2,7 @@ const LEVELS = { debug: 10, info: 20, warn: 30, error: 40 };
 
 function currentLevel() {
   const raw = (process.env.LOG_LEVEL || "info").toLowerCase();
-  return LEVELS[raw] ?? LEVELS.info;
+  return LEVELS[raw] != null ? LEVELS[raw] : LEVELS.info;
 }
 
 function stamp() {
@@ -13,7 +13,7 @@ function stamp() {
 function localStamp() {
   try {
     return new Date().toLocaleString("id-ID", { hour12: false });
-  } catch {
+  } catch (e) {
     return new Date().toString();
   }
 }
@@ -21,7 +21,7 @@ function localStamp() {
 function timeStamp() {
   try {
     return new Date().toLocaleTimeString("id-ID", { hour12: false });
-  } catch {
+  } catch (e) {
     return new Date().toISOString();
   }
 }
@@ -41,21 +41,21 @@ function fmt(scope, level, msg, extra) {
   if (typeof extra === "string") return `${head} ${extra}`;
   try {
     const entries = Object.entries(extra).filter(
-      ([, v]) => v !== undefined && v !== null
+      (pair) => pair[1] !== undefined && pair[1] !== null
     );
     if (!entries.length) return head;
-    const width = Math.max(...entries.map(([k]) => k.length));
-    const lines = entries.map(([k, v]) => {
-      const pad = `  ${k.padEnd(width)} : `;
-      return `${pad}${fmtValue(v, " ".repeat(pad.length))}`;
+    const width = Math.max.apply(null, entries.map((pair) => pair[0].length));
+    const lines = entries.map((pair) => {
+      const pad = `  ${pair[0].padEnd(width)} : `;
+      return `${pad}${fmtValue(pair[1], " ".repeat(pad.length))}`;
     });
-    return [head, ...lines].join("\n");
-  } catch {
+    return [head].concat(lines).join("\n");
+  } catch (e) {
     return `${head} ${String(extra)}`;
   }
 }
 
-export function createLogger(scope = "app") {
+function createLogger(scope = "app") {
   const log = (level, msg, extra) => {
     if (LEVELS[level] < currentLevel()) return;
     const line = fmt(scope, level, msg, extra);
@@ -74,7 +74,7 @@ export function createLogger(scope = "app") {
   };
 }
 
-export function ms(msVal) {
+function ms(msVal) {
   if (msVal < 1000) return `${msVal}ms`;
   const s = Math.round(msVal / 1000);
   if (s < 60) return `${s}s`;
@@ -85,3 +85,5 @@ export function ms(msVal) {
   const rm = m % 60;
   return rm ? `${h}h ${rm}m` : `${h}h`;
 }
+
+module.exports = { createLogger, ms };

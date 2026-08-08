@@ -1,7 +1,7 @@
-import cron from "node-cron";
-import { loadConfig } from "./config.js";
-import { createPost } from "./bot.js";
-import { createLogger, ms } from "./logger.js";
+const cron = require("node-cron");
+const { loadConfig } = require("./config.js");
+const { createPost } = require("./bot.js");
+const { createLogger, ms } = require("./logger.js");
 
 const log = createLogger("scheduler");
 
@@ -104,7 +104,7 @@ async function executeRun(postsPerRun, reason) {
         angle: res.angle,
         mode: res.mode,
         type: res.type,
-        media: res.medias?.length || 0,
+        media: (res.medias && res.medias.length) || 0,
         tayang: new Date(res.scheduleAt).toLocaleString("id-ID", { hour12: false }),
         caption: res.description,
       });
@@ -112,13 +112,15 @@ async function executeRun(postsPerRun, reason) {
       runOk = false;
       errCount += 1;
       lastRunOk = false;
-      lastError = err.response?.data
-        ? JSON.stringify(err.response.data)
-        : err.message;
+      lastError =
+        err.response && err.response.data
+          ? JSON.stringify(err.response.data)
+          : err.message;
       log.error(`post ${n}/${postsPerRun} GAGAL (${ms(Date.now() - tPost)})`, {
         error: err.message,
-        status: err.response?.status,
-        detail: err.response?.data ? JSON.stringify(err.response.data) : undefined,
+        status: err.response && err.response.status,
+        detail:
+          err.response && err.response.data ? JSON.stringify(err.response.data) : undefined,
       });
     }
   }
@@ -130,7 +132,7 @@ async function executeRun(postsPerRun, reason) {
   );
 }
 
-export function startScheduler() {
+function startScheduler() {
   const config = loadConfig();
   const {
     cron: expr,
@@ -212,7 +214,7 @@ export function startScheduler() {
   return task;
 }
 
-export function stopScheduler() {
+function stopScheduler() {
   if (heartbeatTimer) {
     clearInterval(heartbeatTimer);
     heartbeatTimer = null;
@@ -228,3 +230,5 @@ export function stopScheduler() {
     });
   }
 }
+
+module.exports = { startScheduler, stopScheduler };
