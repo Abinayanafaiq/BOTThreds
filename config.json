@@ -10,11 +10,11 @@
     "maxDescriptionLength": 500
   },
   "cta": "https://9inference.cloud/pricing",
-  "productDetail": "Katalog paket 9inference.cloud (sekali bayar, kuota token input+output, API key khusus per paket, kompatibel OpenAI SDK, bayar bisa QRIS). Angka \"setara\" adalah harga paket dibagi kuota — boleh dipakai apa adanya, dilarang menghitung ulang sendiri:\n\nPaket Coding — semua model coding, aktif 24 jam:\n- Coding Lite Rp8.000 (10 juta token) = setara Rp800 / 1 juta token\n- Coding Pro Rp24.000 (30 juta token) = setara Rp800 / 1 juta token\n- Coding Turbo Rp40.000 (50 juta token) = setara Rp800 / 1 juta token\n\nPaket per model:\n- Nemotron 3 Ultra Rp12.000 (50 juta token, 24 jam) = setara Rp240 / 1 juta token\n- GLM 5.2 Rp14.000 (25 juta token, 2 hari) = setara Rp560 / 1 juta token\n- DeepSeek V4 Pro Rp14.000 (25 juta token, 2 hari) = setara Rp560 / 1 juta token\n- gpt-oss-120b Rp15.000 (90 juta token, 24 jam) = setara Rp170 / 1 juta token\n- Qwen3.7 Rp17.000 (50 juta token, 24 jam) = setara Rp340 / 1 juta token\n- DeepSeek V4 Flash 0731 Rp18.000 (50 juta token, 24 jam) = setara Rp360 / 1 juta token\n- GLM 5.2 Rp25.000 (50 juta token, 24 jam) = setara Rp500 / 1 juta token\n- DeepSeek V4 Flash 0731 Rp35.000 (100 juta token, 24 jam) = setara Rp350 / 1 juta token\n- Kimi-k3 Rp14.000 (11 juta token, 24 jam) = setara Rp1.270 / 1 juta token\n- Kimi-k3 Rp38.000 (50 juta token, 24 jam) = setara Rp760 / 1 juta token",
+  "productDetail": "Katalog paket 9inference.cloud (sekali bayar, kuota token input+output, API key khusus per paket, kompatibel OpenAI SDK, bayar bisa QRIS). Angka \"setara\" adalah harga paket dibagi kuota — boleh dipakai apa adanya, dilarang menghitung ulang sendiri:\n\nPaket Coding — semua model coding, aktif 24 jam:\n- Coding Lite Rp8.000 (10 juta token) = setara Rp800 / 1 juta token\n- Coding Pro Rp24.000 (30 juta token) = setara Rp800 / 1 juta token\n- Coding Turbo Rp40.000 (50 juta token) = setara Rp800 / 1 juta token\n\nPaket per model:\n- Nemotron 3 Ultra Rp12.000 (50 juta token, 24 jam) = setara Rp240 / 1 juta token\n- GLM 5.2 Rp14.000 (25 juta token, 2 hari) = setara Rp560 / 1 juta token\n- DeepSeek V4 Pro Rp14.000 (25 juta token, 2 hari) = setara Rp560 / 1 juta token\n- gpt-oss-120b Rp15.000 (90 juta token, 24 jam) = setara Rp170 / 1 juta token\n- Qwen3.7 Rp17.000 (50 juta token, 24 jam) = setara Rp340 / 1 juta token\n- DeepSeek V4 Flash 0731 Rp18.000 (50 juta token, 24 jam) = setara Rp360 / 1 juta token\n- GLM 5.2 Rp25.000 (50 juta token, 24 jam) = setara Rp500 / 1 juta token\n- DeepSeek V4 Flash 0731 Rp35.000 (100 juta token, 24 jam) = setara Rp350 / 1 juta token\n- DeepSeek V4 Flash 0731 Rp40.000 (250 juta token, 24 jam) = setara Rp160 / 1 juta token\n- Kimi-k3 Rp14.000 (11 juta token, 24 jam) = setara Rp1.270 / 1 juta token\n- Kimi-k3 Rp38.000 (50 juta token, 24 jam) = setara Rp760 / 1 juta token",
   "contentMode": "ai",
   "ai": {
-    "systemPrompt": "Role: Copywriter Threads/X berbahasa Indonesia yang ahli psikologi marketing. Audiens: developer, AI builder, startup founder, indie hacker.\n\nReturn HANYA teks postingan final.\n\nTarget utama: baris pertama HARUS menghentikan scroll (pattern interrupt).\n\nTeknik psikologi — ROTASI, jangan pakai teknik yang sama dua kali berturut-turut:\n- Curiosity gap: buka dengan fakta/pertanyaan menggantung (\"Masih bayar mahal coding assistant tiap bulan?\")\n- Loss aversion: tekankan kerugian, bukan keuntungan (\"Tiap bulan kamu buang ratusan ribu buat langganan\")\n- Anchoring: sandarkan ke harga yang terasa mahal, lalu kontraskan dengan harga paket\n- Social proof: \"developer yang paham sudah pindah\", \"yang tau duluan yang untung\"\n- FOMO ringan: urgensi tanpa mengarang angka stok (\"selagi masih ada\")\n- Specificity: selalu pakai angka persis — angka spesifik lebih dipercaya daripada kata \"murah\"\n\nStruktur: HOOK (1 baris, menghentikan scroll) → REVEAL (paket + angka persis dari informasi produk) → PAYOFF (skala: \"bayangin, RpY dapet Z juta token\") → link.\n\nAturan:\n- Maksimal 350 karakter, 3-5 baris.\n- Kasual developer: boleh \"gue/lo\", \"boncos\", \"cheat code\", \"game changer\", \"no-brainer\".\n- Soft selling: terdengar seperti developer berbagi temuan, bukan iklan.\n- JANGAN menyebut pay-as-you-go, top up saldo, atau langganan bulanan sebagai produk yang dijual.\n\nPostingan WAJIB:\n- Fokus ke paket yang disebut di angle, dengan harga & kuota PERSIS dari informasi produk (pakai angka \"setara\" yang tersedia, dilarang menghitung sendiri). Dilarang mengarang harga, kuota, stok, atau nama paket.\n- Menyebut 9inference.cloud\n\nWAJIB mengakhiri setiap posting dengan link berikut pada baris terpisah:\nhttps://9inference.cloud/pricing\n\nReturn HANYA postingan final dalam Bahasa Indonesia.",
-    "userPromptTemplate": "Buat postingan Threads/X dengan angle: {{topic}}.\n\nInformasi produk:\n{{detail}}\n\nPenutup:\n{{cta}}\n\nBalas HANYA dengan postingan final dalam Bahasa Indonesia.",
+    "systemPrompt": "Role: Storyteller & copywriter Threads/X berbahasa Indonesia yang jago clickbait jujur — hook boleh heboh, fakta produk tetap asli. Audiens: developer, AI builder, startup founder, indie hacker.\n\nReturn HANYA teks postingan final.\n\nBentuk postingan: CERITA PENDEK (storytelling), BUKAN daftar fitur. Selalu ada tokoh & momen: \"temen gue\", \"kemarin ada yang DM\", \"pengalaman gue seminggu ini\", \"di grup dev\". Boleh dramatis & dilebih-lebihkan secara gaya, tapi angka produk WAJIB asli.\n\nBaris pertama = clickbait hook yang menghentikan scroll. ROTASI teknik, jangan pakai yang sama dua kali berturut-turut:\n- Curiosity gap ekstrem: \"Gue kira bercanda... ternyata beneran.\"\n- Konflik/kerugian: \"Temen gue hampir nangis lihat bill API-nya.\"\n- Plot twist: \"Dia berhenti langganan $20/bulan. Bukan karena nyerah.\"\n- Angka aneh yang bikin penasaran: \"Rp40.000 = 250 juta token. Beneran.\"\n- Dialog: \"'Bro, kok API lo gak abis-abis?' — ini jawabannya.\"\n\nStruktur: HOOK clickbait (1 baris) → CERITA singkat (tokoh + masalah + momen nemu solusi) → REVEAL produk (nama paket + harga + kuota PERSIS dari informasi produk) → link.\n\nAturan:\n- Maksimal 450 karakter, 4-7 baris.\n- Kasual developer: boleh \"gue/lo\", \"boncos\", \"cheat code\", \"game changer\", \"no-brainer\".\n- Soft selling: terdengar seperti teman cerita, bukan brosur.\n- JANGAN menyebut pay-as-you-go, top up saldo, atau langganan bulanan sebagai produk yang dijual.\n\nPostingan WAJIB:\n- Fokus ke paket yang disebut di angle, dengan harga & kuota PERSIS dari informasi produk (pakai angka \"setara\" yang tersedia, dilarang menghitung sendiri). Dilarang mengarang harga, kuota, durasi aktif, stok, diskon, testimoni angka, atau nama paket.\n- Menyebut 9inference.cloud\n\nWAJIB mengakhiri setiap posting dengan link berikut pada baris terpisah:\nhttps://9inference.cloud/pricing\n\nReturn HANYA postingan final dalam Bahasa Indonesia.",
+    "userPromptTemplate": "Buat cerita pendek Threads/X (storytelling + clickbait) dengan angle: {{topic}}.\n\nInformasi produk:\n{{detail}}\n\nPenutup:\n{{cta}}\n\nBalas HANYA dengan postingan final dalam Bahasa Indonesia.",
     "temperature": 0.85,
     "maxTokens": 300,
     "retries": 2,
@@ -28,7 +28,8 @@
     "https://i.ibb.co/4RmvSfVN/Screenshot-2026-08-07-075311.png",
     "https://i.ibb.co/rKghfZNC/Screenshot-2026-08-07-101945.png",
     "https://i.ibb.co/TDY9s9hY/Screenshot-2026-08-07-102201.png",
-    "https://i.ibb.co/zWpxSRx3/Screenshot-2026-08-07-102303.png"
+    "https://i.ibb.co/zWpxSRx3/Screenshot-2026-08-07-102303.png",
+    "https://i.ibb.co/M5RNGFyc/Screenshot-2026-08-08-144038.png"
   ],
   "imageMode": "random",
   "threadsTopic": "AI Threads",
@@ -44,13 +45,12 @@
     "Paket Nemotron 3 Ultra",
     "Paket Kimi-k3"
   ],
-  "topicMode": "sequential",
+  "topicMode": "random",
   "schedule": {
     "enabled": true,
     "cron": "*/30 * * * *",
     "postsPerRun": 1,
     "runOnStart": false,
     "heartbeatMinutes": 5
-  },
-  "_topicIndex": 0
+  }
 }
