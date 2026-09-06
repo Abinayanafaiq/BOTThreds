@@ -1,20 +1,20 @@
 {
   "deepseek-flash": {
     "variants": [
-      "Masih bayar coding assistant ratusan ribu tiap bulan? 🩸\n\nDeepSeek V4 Flash 0731 di 9inference.cloud: Rp40.000 sekali bayar, 250 juta token.\nSetara Rp160 per 1 juta token. Aktif 24 jam, API key khusus, kompatibel OpenAI SDK.\n\n{{cta}}",
-      "Developer yang paham lagi pindah ke sini 👀\n\nDeepSeek V4 Flash 0731 — Rp40rb dapet 250 juta token di 9inference.cloud.\nLangsung jalan di Cline/Continue/Cursor. Bayar bisa QRIS.\n\n{{cta}}",
-      "Langganan AI coding: $20/bulan.\nDeepSeek V4 Flash 0731: Rp40.000 dapat 250 juta token. 😮‍💨\n\nSekali bayar di 9inference.cloud, aktif 24 jam, kompatibel OpenAI SDK.\n\n{{cta}}",
-      "Rp40.000 = 250 juta token DeepSeek V4 Flash 0731.\n\nItu setara Rp160 per 1 juta token — boncos API bisa diselamatkan.\nSekali bayar di 9inference.cloud, API key khusus, bayar QRIS.\n\n{{cta}}",
-      "Cheat code buat yang boncos API coding 🧠\n\nDeepSeek V4 Flash 0731: 250 juta token cuma Rp40rb di 9inference.cloud.\nSelagi harga segini, gas.\n\n{{cta}}"
+      "Masih bayar coding assistant ratusan ribu tiap bulan? 🩸\n\nDeepSeek V4 Flash 0731 di 9inference.cloud: Rp30.000 sekali bayar, 250 juta token.\nSetara Rp120 per 1 juta token. Aktif 7 hari, API key khusus, kompatibel OpenAI SDK.\n\n{{cta}}",
+      "Developer yang paham lagi pindah ke sini 👀\n\nDeepSeek V4 Flash 0731 — Rp30rb dapet 250 juta token di 9inference.cloud.\nLangsung jalan di Cline/Continue/Cursor. Bayar bisa QRIS.\n\n{{cta}}",
+      "Langganan AI coding: $20/bulan.\nDeepSeek V4 Flash 0731: Rp30.000 dapat 250 juta token. 😮‍💨\n\nSekali bayar di 9inference.cloud, aktif 7 hari, kompatibel OpenAI SDK.\n\n{{cta}}",
+      "Rp30.000 = 250 juta token DeepSeek V4 Flash 0731.\n\nItu setara Rp120 per 1 juta token — boncos API bisa diselamatkan.\nSekali bayar di 9inference.cloud, API key khusus, bayar QRIS.\n\n{{cta}}",
+      "Cheat code buat yang boncos API coding 🧠\n\nDeepSeek V4 Flash 0731: 250 juta token cuma Rp30rb di 9inference.cloud.\nSelagi harga segini, gas.\n\n{{cta}}"
     ]
   },
   "paket-coding": {
     "variants": [
       "Temen gue hampir nangis lihat bill API bulan lalu. 😭\n\nTerus gue kasih tau {{topic}} di 9inference.cloud — sekali bayar, kuota jutaan token, langsung jalan di tools coding-nya.\n\nSekarang dia yang paling rajin ngoding.\n\n{{cta}}",
-      "Gue kira bercanda. Ternyata beneran. 🤯\n\n{{topic}} di 9inference.cloud: sekali bayar, kuota jutaan token, aktif 24 jam, API key khusus.\n\nBayarnya bisa QRIS pula.\n\n{{cta}}",
+      "Gue kira bercanda. Ternyata beneran. 🤯\n\n{{topic}} di 9inference.cloud: sekali bayar, kuota jutaan token, aktif 7 hari, API key khusus.\n\nBayarnya bisa QRIS pula.\n\n{{cta}}",
       "Dulu tiap nulis prompt mikir dulu: \"worth it gak ya?\" 💀\n\nSejak pakai {{topic}} dari 9inference.cloud — kuota jutaan token, sekali bayar — gue berhenti menghitung.\n\n{{cta}}",
       "Kemarin iseng hitung pengeluaran API bulanan.\nHasilnya bikin mules. 🤢\n\nTerus nemu {{topic}} di 9inference.cloud: sekali bayar, kuota jutaan token, kompatibel OpenAI SDK.\n\nLangsung pindah.\n\n{{cta}}",
-      "Di grup dev ada yang pamer: sebulan ngoding AI cuma abis puluhan ribu.\n\nRahasianya? {{topic}} dari 9inference.cloud — sekali bayar, kuota jutaan token, aktif 24 jam.\n\nYang tau duluan yang untung. 👀\n\n{{cta}}"
+      "Di grup dev ada yang pamer: sebulan ngoding AI cuma abis puluhan ribu.\n\nRahasianya? {{topic}} dari 9inference.cloud — sekali bayar, kuota jutaan token, aktif 7 hari.\n\nYang tau duluan yang untung. 👀\n\n{{cta}}"
     ]
   },
   "pain-point": {
